@@ -15,7 +15,7 @@ app.get('/', (req, res) => {
 });
 
 // Create or open the SQLite database
-const db = new sqlite3.Database('./survey.db', (err) => {
+const db = new sqlite3.Database('./answers.db', (err) => {
     if (err) {
         console.error('Error opening database', err.message);
     } else {

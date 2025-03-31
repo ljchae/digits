@@ -5,8 +5,11 @@ document.addEventListener('DOMContentLoaded', function() {
     document.getElementById('todayDate').textContent = today.toLocaleDateString('en-US', dateOptions);
     
     // Format date as YYYY-MM-DD for JSON lookup
-    //const formattedDate = today.toISOString().split('T')[0];
-    const formattedDate = '2026-01-01'; // For testing purposes, set a fixed date
+    const formattedDate = today.toISOString().split('T')[0];
+    // const formattedDate = '2026-01-01'; // For testing purposes, set a fixed date
+
+    // Fetch the current average when the page loads
+    fetchAverage();
 
     // Load questions from JSON file
     fetch('api/questions')
@@ -41,7 +44,7 @@ document.addEventListener('DOMContentLoaded', function() {
                         headers: {
                             'Content-Type': 'application/json',
                         },
-                        body: JSON.stringify({ answer: parseInt(answer) }),
+                        body: JSON.stringify({ answer: parseInt(userAnswer) }),
                     })
                     .then(response => {
                         if (!response.ok) {
@@ -118,7 +121,4 @@ document.addEventListener('DOMContentLoaded', function() {
             document.getElementById('count').textContent = 'Error loading data';
         });
     }
-
-    // Fetch the current average when the page loads
-    fetchAverage();
 });
