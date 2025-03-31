@@ -1,7 +1,8 @@
 document.addEventListener('DOMContentLoaded', function() {
     // For testing
-    const isDev = window.location.host.includes('127.0.0.1:55920') || 
-                  window.location.host.includes('localhost:5500');
+    const isDev = window.location.host.includes('127.0.0.1:8080') || 
+                  window.location.host.includes('127.0.0.1:3000') ||      
+                  window.location.host.includes('localhost:3000');
     console.log('isDev:', isDev);
 
     // Display current date
