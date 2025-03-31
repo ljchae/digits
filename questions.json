@@ -1,0 +1,44 @@
+[
+    {
+      "question": "How many US presidents have had facial hair?",
+      "answer": 13,
+      "fact": "13 US presidents had facial hair, with the last being William Howard Taft who sported a mustache.",
+      "date": "2025-03-31"
+    },
+    {
+      "question": "How many bones are in the adult human body?",
+      "answer": 206,
+      "fact": "The adult human skeleton has 206 bones, while babies are born with approximately 300 bones that fuse together as they grow.",
+      "date": "2025-03-30"
+    },
+    {
+      "question": "How many elements were in the original periodic table published by Dmitri Mendeleev in 1869?",
+      "answer": 63,
+      "fact": "Mendeleev's original periodic table contained 63 elements, with several gaps left for undiscovered elements.",
+      "date": "2025-03-29"
+    },
+    {
+      "question": "How many countries are members of the United Nations as of 2024?",
+      "answer": 193,
+      "fact": "The United Nations has 193 member states, with the most recent addition being South Sudan in 2011.",
+      "date": "2025-03-28"
+    },
+    {
+      "question": "How many official languages does the United Nations recognize?",
+      "answer": 6,
+      "fact": "The UN recognizes 6 official languages: Arabic, Chinese, English, French, Russian, and Spanish.",
+      "date": "2025-02-27"
+    },
+    {
+      "question": "How many keys are on a standard piano?",
+      "answer": 88,
+      "fact": "A standard piano has 88 keys: 52 white and 36 black keys, spanning over 7 octaves.",
+      "date": "2025-02-26"
+    },
+    {
+      "question": "How many films has Steven Spielberg directed as of 2024?",
+      "answer": 34,
+      "fact": "Steven Spielberg has directed 34 feature films throughout his illustrious career, from 'Duel' in 1971 to 'The Fabelmans' in 2022.",
+      "date": "2025-02-25"
+    }
+  ]

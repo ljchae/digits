@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title> digits - the daily number guessing game </title>
+    <link href='https://fonts.googleapis.com/css?family=Pixelify Sans' rel='stylesheet'>
+    <link rel="stylesheet" href="/public/style.css">
+</head>
+<body>
+    <header>
+        <a href="/public/index.html" style="text-decoration: none; flex-shrink: 0;">
+            <img src="/public/logo.png" alt="Logo" style="width: 150px;">
+        </a>
+        <h1>the daily number guessing game</h1>
+        
+        <nav>
+            <a href="/public/pages/today.html" class="nav-link"> today </a>
+            <a href="/public/pages/past.html" class="nav-link-active"> past </a>
+            <!-- <a href="/public/pages/stats.html" class="nav-link"> stats </a> -->
+        </nav>
+    </header>
+    
+    <div class="container"> 
+        <h2>Past Questions</h2>
+        <div class="loading">Loading past questions...</div>
+        <div id="questionsContainer" class="questions-grid">
+            <!-- Past questions will be dynamically inserted here -->
+        </div>
+    </div>
+
+    <script src="/public/script.js"></script>
+</body>
+</html>

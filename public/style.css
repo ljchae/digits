@@ -1,0 +1,151 @@
+:root {
+    --lightblue: #b7d1ea;
+    --ganache: #34292a;
+    --white: #f0f0f0;
+    --black: #000000;
+    --chocolate: #51342c;
+    --cream: #efebc4;
+    --yellow: #dabf5c;
+}
+
+body {
+    font-family: 'Pixelify Sans', Courier, monospace;
+    font-size: 16px;
+    max-width: 600px;
+    margin: 0 auto;
+    padding: 20px;
+    position: relative;
+    background-color: var(--ganache);
+}
+
+header {
+    display: flex;
+    align-items: center;
+    padding: 10px 0;
+    min-width: 320px;
+    width: 100%;
+    margin-bottom: 20px;
+    position: relative;
+}
+
+header h1 {
+    font-size: 15px;
+    color: var(--cream);
+    margin: 0 20px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+header nav {
+    display: flex;
+    gap: 15px;
+    margin-left: auto;
+}
+
+header nav a {
+    text-decoration: none;
+    color: var(--cream);
+    font-size: 16px;
+}
+
+header nav a:hover {
+    color: var(--yellow);
+}
+
+.container {
+    background-color: var(--chocolate);
+    border-radius: 8px;
+    padding: 20px;
+    margin-top: 20px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+.questions-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
+}
+        
+.question-card {
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+}
+
+h1, h2 {
+    color: var(--cream);
+    font-family: 'Pixelify Sans', Courier, monospace;
+}
+
+label {
+    display: block;
+    margin-bottom: 8px;
+    font-weight: bold;
+    color: var(--cream);
+}
+
+input {
+    width: calc(100% - 16px);
+    padding: 8px;
+    margin-bottom: 20px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    box-sizing: border-box;
+}
+
+button {
+    background-color: var(--yellow);
+    color: var(--ganache);
+    border: none;
+    padding: 10px 15px;
+    border-radius: 4px;
+    cursor: pointer;
+    font-family: 'Pixelify Sans', Courier, monospace;
+}
+
+button:hover {
+    background-color: var(--cream);
+}
+
+.results {
+    margin-top: 20px;
+    padding-top: 20px;
+    border-top: 1px solid var(--cream);
+    color: var(--cream);
+}
+
+.current-date {
+    color: var(--cream);
+    font-size: 14px;
+    margin-bottom: 15px;
+}
+
+.answer-reveal {
+    margin-top: 20px;
+    padding: 15px;
+    background-color: var(--ganache);
+    border-radius: 4px;
+    display: none;
+}
+
+.answer-reveal h3 {
+    margin-top: 0;
+    color: var(--yellow);
+}
+
+.answer-reveal p {
+    color: var(--cream);
+}
+
+.nav-link {
+    display: flex;
+    gap: 15px;
+    margin-left: auto;
+}
+
+.nav-link-active {
+    display: flex;
+    gap: 15px;
+    margin-left: auto;
+    color: var(--yellow);
+}
