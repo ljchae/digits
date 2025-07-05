@@ -150,3 +150,10 @@ button:hover {
     margin-left: auto;
     color: var(--yellow);
 }
+
+.loading {
+    text-align: center;
+    padding: 40px;
+    font-size: 18px;
+    color: var(--lightblue);
+}

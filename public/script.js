@@ -1,4 +1,10 @@
 document.addEventListener('DOMContentLoaded', function() {
+    // For testing
+    const isDev = window.location.host.includes('127.0.0.1:8080') || 
+                  window.location.host.includes('127.0.0.1:3000') ||      
+                  window.location.host.includes('localhost:3000');
+    console.log('isDev:', isDev);
+
     // Display current date
     const today = new Date();
     const dateOptions = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
@@ -6,13 +12,16 @@ document.addEventListener('DOMContentLoaded', function() {
     
     // Format date as YYYY-MM-DD for JSON lookup
     const formattedDate = today.toISOString().split('T')[0];
-    // const formattedDate = '2026-01-01'; // For testing purposes, set a fixed date
+    
+    const questionsPath = isDev ? 
+        '/questions.json' : // Path relative to the HTML file in Live Server
+        '/api/past-questions';  // API endpoint in production
 
     // Fetch the current average when the page loads
     fetchAverage();
 
     // Load questions from JSON file
-    fetch('api/questions')
+    fetch(questionsPath)
         .then(response => {
             if (!response.ok) {
                 throw new Error('Failed to load questions.json');
@@ -36,34 +45,43 @@ document.addEventListener('DOMContentLoaded', function() {
                     event.preventDefault();
                     
                     const userAnswer = parseInt(document.getElementById('answer').value);
-                    
+
                     // test
-                    // Submit the answer to the server
-                    fetch('/api/answers', {
-                        method: 'POST',
-                        headers: {
-                            'Content-Type': 'application/json',
-                        },
-                        body: JSON.stringify({ answer: parseInt(userAnswer) }),
-                    })
-                    .then(response => {
-                        if (!response.ok) {
-                            throw new Error('Network response was not ok');
-                        }
-                        return response.json();
-                    })
-                    .then(data => {
+                    if (isDev) {
+                        // Save to localStorage for development mode
+                        saveAnswerToLocalStorage(userAnswer);
                         // Clear the form
                         document.getElementById('answer').value = '';
-                        // Update the average
+                        // Update the stats
                         fetchAverage();
-                        alert('Thank you for your response!');
-                    })
-                    .catch(error => {
-                        console.error('Error:', error);
-                        alert('There was an error submitting your response. Please try again.');
-                    });
+                    }
 
+                    else {
+                        // Submit the answer to the server
+                        fetch('/api/answers', {
+                            method: 'POST',
+                            headers: {
+                                'Content-Type': 'application/json',
+                            },
+                            body: JSON.stringify({ answer: parseInt(userAnswer) }),
+                        })
+                        .then(response => {
+                            if (!response.ok) {
+                                throw new Error('Network response was not ok');
+                            }
+                            return response.json();
+                        })
+                        .then(data => {
+                            // Clear the form
+                            document.getElementById('answer').value = '';
+                            // Update the average
+                            fetchAverage();
+                        })
+                        .catch(error => {
+                            console.error('Error:', error);
+                            alert('There was an error submitting your response. Please try again.');
+                        });
+                    }
                     // Reveal the answer section
                     const answerReveal = document.getElementById('answerReveal');
                     answerReveal.style.display = 'block';
@@ -88,7 +106,7 @@ document.addEventListener('DOMContentLoaded', function() {
                     }));
                     
                     // Update previous questions display
-                    loadPreviousQuestions();
+                    // loadPreviousQuestions();
                 });
             } else {
                 document.getElementById('questionLabel').textContent = "No question available for today. Check back tomorrow!";
@@ -104,6 +122,14 @@ document.addEventListener('DOMContentLoaded', function() {
     
     // Function to fetch the current average from the server
     function fetchAverage() {
+        if (isDev) {
+            // Get data from localStorage in dev mode
+            const stats = getStatsFromLocalStorage();
+            document.getElementById('average').textContent = stats.average.toFixed(2);
+            document.getElementById('count').textContent = stats.count;
+            return;
+        }
+        
         fetch('/api/stats')
         .then(response => {
             if (!response.ok) {
@@ -120,5 +146,32 @@ document.addEventListener('DOMContentLoaded', function() {
             document.getElementById('average').textContent = 'Error loading data';
             document.getElementById('count').textContent = 'Error loading data';
         });
+    }
+
+    // Helper function to save answer to localStorage
+    function saveAnswerToLocalStorage(answer) {
+        // Get existing answers or initialize empty array
+        const answers = JSON.parse(localStorage.getItem('surveyAnswers') || '[]');
+        // Add new answer
+        answers.push(answer);
+        // Save back to localStorage
+        localStorage.setItem('surveyAnswers', JSON.stringify(answers));
+    }
+
+    // Helper function to get stats from localStorage
+    function getStatsFromLocalStorage() {
+        const answers = JSON.parse(localStorage.getItem('surveyAnswers') || '[]');
+        
+        if (answers.length === 0) {
+            return { average: 0, count: 0 };
+        }
+        
+        const sum = answers.reduce((total, num) => total + num, 0);
+        const average = sum / answers.length;
+        
+        return {
+            average: average,
+            count: answers.length
+        };
     }
 });
